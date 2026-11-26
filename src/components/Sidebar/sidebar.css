@@ -1,0 +1,168 @@
+.sidebar {
+    height: 100%;
+    width: 100%;
+    /* background:
+        radial-gradient(ellipse at 50% 0%,
+            rgba(91, 33, 182, 0.12),
+            transparent 52%),
+        linear-gradient(180deg,
+            #0b081c 0%,
+            #080713 55%,
+            #0b081b 100%); */
+
+
+
+}
+
+/* top */
+.sidebar-top {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.sidebar-top h1 {
+    position: absolute;
+    width: 180px;
+    top: 40px;
+    left: 10px;
+    font-size: 1.3rem;
+
+}
+
+.sidebar-top img {
+    position: absolute;
+    width: 180px;
+    top: -20px;
+}
+
+/* center */
+.sidebar-center {
+    width: 40%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    /* background-color: rgba(139, 92, 246, 0.18); */
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.sidebar-center a {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    padding: 15px;
+    z-index: 1000;
+    transition: all 0.35s cubic-bezier(.34, 1.56, .64, 1);
+
+
+}
+
+.sidebar-center a.active {
+    position: relative;
+
+    background: linear-gradient(145deg,
+            rgba(196, 181, 253, 0.35),
+            rgba(139, 92, 246, 0.12));
+
+    border: 1px solid rgba(196, 181, 253, 0.4);
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    box-shadow:
+        inset 0 2px 5px rgba(255, 255, 255, 0.3),
+        inset 0 -2px 5px rgba(139, 92, 246, 0.1),
+        0 0 20px rgba(139, 92, 246, 0.25);
+
+    transition: all 0.35s cubic-bezier(.34, 1.56, .64, 1);
+    animation: bubble-pop 0.4s ease;
+}
+
+/* توهج الأيقونة */
+.sidebar-center a.active svg {
+    color: #D8BFFF;
+    filter: drop-shadow(0 0 7px #A78BFA);
+}
+
+/* لمعة الفقاعة */
+.sidebar-center a.active::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 15%;
+    width: 70%;
+    height: 35%;
+    background: rgba(255, 255, 255, 0.18);
+    border-radius: 50%;
+    filter: blur(8px);
+    pointer-events: none;
+}
+
+@keyframes bubble-pop {
+    0% {
+        transform: scale(0.85);
+    }
+
+    60% {
+        transform: scale(1.08);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.sidebar-center a {
+    position: relative;
+}
+
+/* Tooltip */
+.sidebar-tooltip {
+    position: absolute;
+
+    left: 65px;
+    top: 50%;
+    transform: translateY(-50%) translateX(-8px);
+
+    padding: 9px 15px;
+
+    background: rgba(30, 25, 48, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    border: 1px solid rgba(196, 181, 253, 0.25);
+    border-radius: 10px;
+
+    color: #E9DDFF;
+    font-size: 13px;
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    opacity: 0;
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transition: all 0.25s ease;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+
+    z-index: 100;
+}
+
+/* عند الهوفر */
+.sidebar-center a:hover .sidebar-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+}

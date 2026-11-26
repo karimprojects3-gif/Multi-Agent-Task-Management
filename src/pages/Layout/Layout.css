@@ -1,0 +1,70 @@
+/* ========================================
+   Flowora - Main Layout
+======================================== */
+
+.layout {
+    width: 100%;
+    min-height: 100vh;
+    display: grid;
+
+    grid-template-columns: 170px minmax(0, 1fr);
+    grid-template-rows: 76px minmax(0, 1fr);
+
+    grid-template-areas:
+        "sidebar navbar"
+        "sidebar content";
+
+    direction: ltr;
+    background-image:
+        radial-gradient(ellipse at 12% 5%,
+            rgba(76, 25, 190, 0.16) 0%,
+            rgba(48, 17, 120, 0.08) 25%,
+            transparent 48%),
+        radial-gradient(ellipse at 52% 0%,
+            rgba(76, 25, 190, 0.09) 0%,
+            transparent 38%),
+        radial-gradient(ellipse at 100% 55%,
+            rgba(48, 20, 130, 0.08) 0%,
+            transparent 38%),
+        linear-gradient(135deg,
+            #080815 0%,
+            #050510 48%,
+            #080613 100%);
+}
+
+
+/* Sidebar - Right side */
+.layout-sidebar {
+    grid-area: sidebar;
+    min-width: 0;
+    direction: rtl;
+}
+
+
+/* Page content */
+.layout-content {
+    grid-area: content;
+    direction: rtl;
+
+}
+
+
+/* Responsive */
+@media (max-width: 768px) {
+    .layout {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: 70px minmax(0, 1fr);
+
+        grid-template-areas:
+            "navbar"
+            "content";
+    }
+
+    .layout-sidebar {
+        display: none;
+    }
+
+    .layout-content {
+        padding: 16px;
+    }
+}

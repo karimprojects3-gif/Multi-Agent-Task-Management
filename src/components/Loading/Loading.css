@@ -1,0 +1,470 @@
+/* =========================================
+   Loading – matches the Login design
+   (royal blue, navy depth, lavender light)
+========================================= */
+
+.loading-page {
+    --navy: #1a0a3e;
+    --purple: #7c3aed;
+    --purple-deep: #3b0764;
+    --lavender: #c4b5fd;
+    --lavender-light: #e9e3ff;
+
+    position: fixed;
+    inset: 0;
+    isolation: isolate;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    z-index: 9999;
+    background:
+        radial-gradient(circle at 50% 42%, rgba(139, 92, 246, 0.5), transparent 45%),
+        radial-gradient(circle at 85% 10%, #1a0536 0%, transparent 40%),
+        linear-gradient(160deg, var(--purple-deep) 0%, #2e1065 55%, var(--purple) 100%);
+}
+
+
+
+/* ----- Soft abstract shapes (echo the login artwork) ----- */
+.loading-shape {
+    position: absolute;
+    z-index: 0;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.loading-shape--one {
+    top: -30vmax;
+    left: -34vmax;
+    width: 80vmax;
+    height: 90vmax;
+    background: radial-gradient(circle at 30% 70%, #8b5cf6 0%, #6d28d9 40%, #3b0764 100%);
+    box-shadow:
+        inset -12px 0 26px -4px rgba(196, 181, 253, 0.85),
+        inset -40px 0 70px -12px rgba(167, 139, 250, 0.5);
+    opacity: 0.85;
+    animation: shapeDriftOne 8s ease-in-out infinite alternate;
+}
+
+.loading-shape--two {
+    bottom: -52vmax;
+    right: -30vmax;
+    width: 110vmax;
+    height: 80vmax;
+    background: radial-gradient(ellipse at 40% 10%, #0f0326 0%, #1e0a4a 35%, #6d28d9 85%, #a855f7 100%);
+    box-shadow: inset 0 10px 22px -4px rgba(196, 181, 253, 0.55);
+    animation: shapeDriftTwo 9s ease-in-out infinite alternate;
+}
+
+/* ----- Content ----- */
+.loading-content {
+    position: relative;
+    z-index: 4;
+    width: min(86vw, 720px);
+    margin: 0 auto;
+    text-align: center;
+    pointer-events: none;
+}
+
+.wordmark-stage {
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    min-width: min(86vw, 690px);
+    height: clamp(88px, 15vw, 140px);
+}
+
+/* ----- Wordmark ----- */
+.flowora-wordmark {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    direction: ltr;
+    margin: 0;
+    color: transparent;
+    font-family: "Helvetica Neue", "Avenir Next", "Segoe UI", sans-serif;
+    font-size: clamp(3.55rem, 10.4vw, 7.8rem);
+    font-weight: 600;
+    line-height: 0.9;
+    letter-spacing: -0.068em;
+    text-rendering: geometricPrecision;
+}
+
+.flowora-wordmark span {
+    display: inline-block;
+    color: transparent;
+    background: linear-gradient(115deg,
+            #ffffff 0%,
+            var(--lavender-light) 35%,
+            var(--lavender) 65%,
+            #ffffff 100%);
+    background-size: 200% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    filter: blur(8px);
+    transform: translate3d(-0.16em, 0.08em, 0) scale(0.92);
+    animation:
+        letterWrite 0.52s cubic-bezier(0.16, 1, 0.3, 1) calc(0.36s + var(--letter-index) * 0.12s) both,
+        letterRadiance 0.9s ease-out 1.43s both,
+        shimmerText 3s ease-in-out 1.6s infinite,
+        letterDissolve 0.52s cubic-bezier(0.4, 0, 1, 1) calc(2.12s + var(--letter-index) * 0.025s) forwards;
+}
+
+/* ----- Glow behind wordmark ----- */
+.wordmark-glow {
+    position: absolute;
+    z-index: 0;
+    width: 84%;
+    height: 58%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse,
+            rgba(196, 181, 253, 0.55),
+            rgba(139, 92, 246, 0.28) 40%,
+            transparent 72%);
+    filter: blur(22px);
+    opacity: 0;
+    transform: scaleX(0.45);
+    animation:
+        glowForm 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both,
+        glowBloom 0.72s ease-in-out 1.43s both,
+        glowFade 0.5s ease-out 2.05s forwards;
+}
+
+/* ----- Light trace ----- */
+.light-trace {
+    position: absolute;
+    z-index: 3;
+    top: 38%;
+    left: 1%;
+    width: 98%;
+    height: 48%;
+    overflow: visible;
+    filter:
+        drop-shadow(0 0 5px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 14px rgba(196, 181, 253, 0.6));
+    pointer-events: none;
+}
+
+.light-trace path {
+    fill: none;
+    stroke: url(#traceLine) #fff;
+    stroke-width: 1.8;
+    stroke-linecap: round;
+    stroke-dasharray: 6 694;
+    stroke-dashoffset: 700;
+    opacity: 0;
+    animation:
+        lightTrace 1.3s cubic-bezier(0.4, 0, 0.2, 1) 0.34s both,
+        traceExit 0.34s ease-out 1.94s forwards;
+}
+
+/* ----- Particles ----- */
+.wordmark-particles {
+    position: absolute;
+    z-index: 4;
+    inset: 50% auto auto 50%;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.wordmark-particles i {
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background: #fff;
+    box-shadow:
+        0 0 6px 2px rgba(255, 255, 255, 0.6),
+        0 0 14px 4px rgba(196, 181, 253, 0.4);
+    opacity: 0;
+    transform: translate(var(--x), var(--y)) scale(0.25);
+    animation: particleRelease 0.6s cubic-bezier(0.18, 0.7, 0.2, 1) calc(2.03s + var(--particle-delay)) forwards;
+}
+
+/* ----- Caption ----- */
+.loading-caption {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 18px;
+    opacity: 0;
+    animation:
+        captionReveal 0.55s ease-out 1.32s both,
+        captionLeave 0.32s ease-in 2.12s forwards;
+}
+
+.loading-caption p {
+    margin: 0;
+    color: rgba(233, 227, 255, 0.85);
+    font-family: "Cairo", "Segoe UI", Tahoma, sans-serif;
+    font-size: clamp(0.8rem, 1.4vw, 0.95rem);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+}
+
+.loading-caption__rule {
+    width: 32px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(233, 227, 255, 0.8));
+    animation: ruleExpand 1.2s ease-out 1.4s both;
+}
+
+.loading-caption__rule:last-child {
+    transform: scaleX(-1);
+}
+
+/* ----- Vignette ----- */
+.loading-vignette {
+    position: absolute;
+    z-index: 5;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(circle at 50% 45%,
+            transparent 35%,
+            rgba(26, 10, 62, 0.35) 68%,
+            rgba(26, 10, 62, 0.8) 100%);
+}
+
+/* ======================
+   KEYFRAMES
+====================== */
+
+@keyframes sceneEmerge {
+    from {
+        opacity: 0;
+        transform: scale(1.04) translateY(10px);
+        filter: blur(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes letterWrite {
+    0% {
+        opacity: 0;
+        filter: blur(12px);
+        transform: translate3d(-0.2em, 0.12em, 0) scale(0.88);
+    }
+
+    56% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+}
+
+@keyframes letterRadiance {
+    0% {
+        text-shadow: 0 0 0 transparent;
+    }
+
+    42% {
+        text-shadow: 0 0 18px rgba(255, 255, 255, 0.6), 0 0 40px rgba(196, 181, 253, 0.5);
+    }
+
+    100% {
+        text-shadow: 0 0 6px rgba(196, 181, 253, 0.25);
+    }
+}
+
+@keyframes shimmerText {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
+    }
+}
+
+@keyframes letterDissolve {
+    0% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        filter: blur(10px);
+        transform: translate3d(0, -0.22em, 0) scale(1.06);
+    }
+}
+
+@keyframes lightTrace {
+    0% {
+        opacity: 0;
+        stroke-dashoffset: 700;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 0.96;
+    }
+
+    100% {
+        opacity: 0.18;
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes traceExit {
+    to {
+        opacity: 0;
+        filter: blur(4px);
+        transform: translateX(5%);
+    }
+}
+
+@keyframes glowForm {
+    to {
+        opacity: 0.55;
+        transform: scaleX(1);
+    }
+}
+
+@keyframes glowBloom {
+    45% {
+        opacity: 0.96;
+        filter: blur(28px);
+    }
+
+    100% {
+        opacity: 0.44;
+    }
+}
+
+@keyframes glowFade {
+    to {
+        opacity: 0;
+        transform: scaleX(1.2);
+    }
+}
+
+@keyframes particleRelease {
+    0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(0.2);
+    }
+
+    28% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        transform: translate(var(--x), var(--y)) scale(0.8);
+    }
+}
+
+@keyframes captionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes captionLeave {
+    to {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes ruleExpand {
+    from {
+        width: 0;
+        opacity: 0;
+    }
+
+    to {
+        width: 32px;
+        opacity: 1;
+    }
+}
+
+@keyframes shapeDriftOne {
+    to {
+        transform: translate3d(4vmax, 3vmax, 0) scale(1.05);
+    }
+}
+
+@keyframes shapeDriftTwo {
+    to {
+        transform: translate3d(-4vmax, -2vmax, 0) scale(0.96);
+    }
+}
+
+/* ======================
+   RESPONSIVE
+====================== */
+
+@media (max-width: 640px) {
+    .wordmark-stage {
+        min-width: 88vw;
+    }
+
+    .flowora-wordmark {
+        font-size: clamp(3.15rem, 15.2vw, 5.4rem);
+    }
+
+    .loading-caption {
+        margin-top: 10px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .loading-shape,
+    .flowora-wordmark span,
+    .wordmark-glow,
+    .light-trace path,
+    .wordmark-particles i,
+    .loading-caption {
+        animation: none;
+    }
+
+    .flowora-wordmark span,
+    .wordmark-glow,
+    .loading-caption {
+        opacity: 1;
+    }
+
+    .flowora-wordmark span {
+        filter: none;
+        transform: none;
+    }
+
+    .wordmark-glow {
+        opacity: 0.32;
+        transform: scaleX(1);
+    }
+
+    .light-trace path,
+    .wordmark-particles {
+        display: none;
+    }
+}

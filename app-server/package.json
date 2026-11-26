@@ -1,0 +1,17 @@
+{
+  "name": "flowora-backend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test:supabase": "node test-supabase.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.118.0",
+    "dotenv": "^18.0.8",
+    "express": "^5.3.0",
+    "multer": "^2.5.0"
+  }
+}

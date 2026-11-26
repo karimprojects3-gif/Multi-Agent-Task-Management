@@ -1,0 +1,467 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --purple-page: #4c1d95;
+    --purple-btn: #7c3aed;
+    --navy: #1a0a3e;
+    --lavender: #c4b5fd;
+    --ink: #0b0b12;
+    --muted: #9a9aa6;
+    --line: #dcdce3;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Cairo', sans-serif;
+    color: var(--ink);
+    background: var(--purple-page);
+}
+
+#root {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 24px;
+}
+
+#f-icon {
+    width: 220px;
+
+    position: absolute;
+    bottom: 460px;
+    left: 165px;
+    z-index: 1;
+}
+
+/* =========================
+   PAGE CARD
+========================= */
+
+.login-page {
+    direction: ltr;
+    /* keeps the form on the left and the artwork on the right */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    max-width: 1080px;
+    min-height: 680px;
+    padding: 18px;
+    border-radius: 64px;
+    background: #fff;
+    animation: loginPageAppear 0.65s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* =========================
+   FORM SIDE
+========================= */
+
+.login-side {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    animation: loginContentFadeIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+}
+
+.login-container {
+    direction: rtl;
+    width: 100%;
+    max-width: 270px;
+    text-align: center;
+}
+
+.login-emoji {
+    font-size: 30px;
+    line-height: 1;
+    margin-bottom: 10px;
+}
+
+.login-container h1 {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.3;
+    color: #000;
+}
+
+.subtitle {
+    margin-top: 4px;
+    margin-bottom: 44px;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.input-group input {
+    width: 100%;
+    height: 42px;
+    padding: 0 20px;
+    padding-inline-end: 46px;
+
+    font-family: inherit;
+    font-size: 12px;
+    color: var(--ink);
+    text-align: right;
+
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    outline: none;
+
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-group input::placeholder {
+    color: var(--muted);
+}
+
+.input-group input:focus {
+    border-color: var(--purple-btn);
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.input-icon {
+    position: absolute;
+    top: 50%;
+    inset-inline-end: 16px;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    color: #b5b5bd;
+    pointer-events: none;
+}
+
+.input-icon--button {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: color 0.2s ease;
+}
+
+.input-icon--button:hover {
+    color: var(--purple-btn);
+}
+
+.input-icon--button:focus-visible {
+    outline: 2px solid var(--purple-btn);
+    outline-offset: 2px;
+}
+
+/* =========================
+   OPTIONS
+========================= */
+
+.options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    margin: 2px 2px 8px;
+    font-size: 10px;
+}
+
+.remember {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.remember input {
+    appearance: none;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: #fff;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.remember input::before {
+    content: "";
+    width: 7px;
+    height: 4px;
+    margin-top: -1px;
+    border-left: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    transform: rotate(-45deg) scale(0);
+    transition: transform 0.15s ease;
+}
+
+.remember input:checked {
+    background: var(--purple-btn);
+    border-color: var(--purple-btn);
+}
+
+.remember input:checked::before {
+    transform: rotate(-45deg) scale(1);
+}
+
+.remember input:focus-visible {
+    outline: 2px solid var(--purple-btn);
+    outline-offset: 2px;
+}
+
+.login-container a {
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.login-container a:hover {
+    color: var(--purple-btn);
+}
+
+/* =========================
+   SUBMIT BUTTON
+========================= */
+
+.login-submit {
+    width: 100%;
+    height: 42px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--purple-btn);
+    color: #fff;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.login-submit:hover {
+    background: #6d28d9;
+}
+
+.login-submit:active {
+    transform: scale(0.99);
+}
+
+.login-submit:focus-visible {
+    outline: 2px solid var(--purple-btn);
+    outline-offset: 3px;
+}
+
+/* =========================
+   DIVIDER + SOCIALS
+========================= */
+
+.divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 26px 0 22px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.divider::before,
+.divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #ececf1;
+}
+
+.socials {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.social-btn {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.social-btn:hover {
+    transform: translateY(-2px);
+    border-color: #b9b9c4;
+}
+
+.social-btn:focus-visible {
+    outline: 2px solid var(--purple-btn);
+    outline-offset: 2px;
+}
+
+.signup {
+    margin-top: 26px;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.signup a {
+    font-weight: 700;
+    color: var(--purple-btn);
+    margin-inline-start: 4px;
+}
+
+/* =========================
+   ARTWORK PANEL
+========================= */
+
+.login-art {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    border-radius: 44px;
+    background:
+        radial-gradient(circle at 85% 8%, #1a0536 0%, transparent 45%),
+        radial-gradient(circle at 70% 100%, #a855f7 0%, transparent 38%),
+        linear-gradient(160deg, #3b0764 0%, #2e1065 55%, #6d28d9 100%);
+    animation: loginArtFadeIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+}
+
+.art-shape {
+    position: absolute;
+    border-radius: 50%;
+}
+
+/* big blue form on the left, lit with a lavender edge */
+.art-shape--one {
+    top: -14%;
+    left: -48%;
+    width: 98%;
+    height: 135%;
+    background:
+        radial-gradient(circle at 30% 70%, #8b5cf6 0%, #6d28d9 40%, #3b0764 100%);
+    box-shadow:
+        inset -10px 0 22px -4px rgba(196, 181, 253, 0.95),
+        inset -34px 0 60px -10px rgba(167, 139, 250, 0.55);
+}
+
+/* dark hill rising from the bottom */
+.art-shape--two {
+    top: 54%;
+    left: -22%;
+    width: 150%;
+    height: 90%;
+    background:
+        radial-gradient(ellipse at 40% 10%, #0f0326 0%, #1e0a4a 35%, #6d28d9 85%, #a855f7 100%);
+    box-shadow:
+        inset 0 8px 18px -4px rgba(196, 181, 253, 0.6);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 860px) {
+    .login-page {
+        grid-template-columns: 1fr;
+        min-height: 0;
+        max-width: 480px;
+        border-radius: 40px;
+    }
+
+    .login-art {
+        display: none;
+    }
+
+    .login-side {
+        padding: 36px 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #root {
+        padding: 16px 12px;
+    }
+
+    .login-page {
+        padding: 10px;
+        border-radius: 32px;
+    }
+}
+
+/* =========================
+   ENTRANCE ANIMATION
+========================= */
+
+@keyframes loginPageAppear {
+    0% {
+        opacity: 0;
+        transform: translateY(22px) scale(0.985);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes loginContentFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes loginArtFadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .login-page,
+    .login-side,
+    .login-art {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
